@@ -170,6 +170,13 @@ const DebateDetail = () => {
               </div>
             )}
 
+            {debate.eventArgument && (
+              <div className="bg-white rounded-lg border border-gray-200 p-6 mb-6">
+                <h2 className="text-lg font-semibold text-gray-900 mb-3">Cool Argument From Event</h2>
+                <p className="text-gray-700 whitespace-pre-wrap">{debate.eventArgument}</p>
+              </div>
+            )}
+
             {/* Additional Info */}
             <div className="bg-white rounded-lg border border-gray-200 p-6">
               <h2 className="text-lg font-semibold text-gray-900 mb-4">Debate Information</h2>

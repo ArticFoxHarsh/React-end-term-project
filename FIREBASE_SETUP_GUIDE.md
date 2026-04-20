@@ -29,14 +29,6 @@ Go to: https://console.firebase.google.com/u/0/project/react-end-term-project-58
 - Click **"Create Index"**
 - Wait 1-2 minutes to build
 
-### Index 2: Arguments (for Arguments page)
-- **Collection:** `arguments`
-- **Fields:**
-  - `uid` (Ascending) ✓
-  - `createdAt` (Descending) ✓
-- Click **"Create Index"**
-- Wait 1-2 minutes to build
-
 ---
 
 ## Step 3: Verify in Firestore Console
@@ -46,11 +38,7 @@ Go to: https://console.firebase.google.com/project/react-end-term-project-58e50/
 1. Click on **"debates"** collection
 2. You should see your debate documents with:
    - Document ID (auto-generated)
-   - Fields: `uid`, `topic`, `format`, `side`, `outcome`, `rating`, `notes`, `date`, `createdAt`
-
-3. Click on **"arguments"** collection
-4. You should see argument documents with:
-   - Fields: `uid`, `claim`, `support[]`, `topicTag`, `usedInDebates`, `createdAt`
+  - Fields: `uid`, `topic`, `format`, `side`, `outcome`, `rating`, `notes`, `eventArgument`, `date`, `createdAt`
 
 ---
 
@@ -60,24 +48,19 @@ Go to: https://console.firebase.google.com/project/react-end-term-project-58e50/
 
 **CREATE:**
 - ✓ User can create a debate if `uid` = their user ID
-- ✓ User can create an argument if `uid` = their user ID
 
 **READ:**
 - ✓ User can read only debates where `uid` = their user ID
-- ✓ User can read only arguments where `uid` = their user ID
 
 **UPDATE/EDIT:**
 - ✓ User can edit debates they own
-- ✓ User can edit arguments they own
 
 **DELETE:**
 - ✓ User can delete debates they own
-- ✓ User can delete arguments they own
 
 ### ❌ Blocked Operations
 
 - ✗ User cannot read other users' debates
-- ✗ User cannot read other users' arguments
 - ✗ User cannot create data with someone else's uid
 - ✗ User cannot modify other users' data
 - ✗ Unauthenticated users cannot access any data
@@ -91,10 +74,10 @@ Go to: https://console.firebase.google.com/project/react-end-term-project-58e50/
    - Topic: "Climate Change"
    - Format: "MUN"
    - Outcome: "Win"
+  - Cool argument from event: "A policy delay today multiplies adaptation costs tomorrow"
    - Click **"Speak"** to add notes via voice
 3. **Go to Dashboard** - you should see it in "Recent Debates"
 4. **Go to Debates page** - you should see all your debates
-5. **Go to Arguments page** - create an argument
 
 If you see any errors:
 - Check browser console (F12) for error messages
@@ -137,23 +120,9 @@ If you see any errors:
   outcome: "Win",
   rating: 4,
   notes: "Great opening, need to improve rebuttal",
+  eventArgument: "A policy delay today multiplies adaptation costs tomorrow",
   date: Timestamp(2024-04-20),
   createdAt: Timestamp(2024-04-20 14:30:00)
-}
-```
-
-### arguments collection
-```javascript
-{
-  uid: "user123",           // Auto-set by security rules
-  claim: "Climate change is human-caused",
-  support: [
-    "CO2 levels rising since industrial revolution",
-    "97% of scientists agree"
-  ],
-  topicTag: "Environment",
-  usedInDebates: 2,
-  createdAt: Timestamp(2024-04-20)
 }
 ```
 

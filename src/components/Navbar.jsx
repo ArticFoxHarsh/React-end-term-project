@@ -3,7 +3,7 @@
  * 
  * Top navigation component displaying:
  * - Logo/brand name on the left
- * - Navigation links (dashboard, debates, arguments, insights, profile)
+ * - Navigation links (dashboard, debates, insights, profile)
  * - User avatar and logout button on the right
  * 
  * Behavior:
@@ -26,7 +26,6 @@ import AuthContext from '../context/AuthContext';
  * Navigation Links:
  * - Dashboard: /dashboard
  * - Debates: /debates
- * - Arguments: /arguments
  * - Insights: /insights
  * - Profile: /profile
  */
@@ -92,7 +91,6 @@ const Navbar = () => {
           <div className="hidden md:flex items-center gap-1">
             <NavLink to="/dashboard" isActive={isActive('/dashboard')} label="Dashboard" />
             <NavLink to="/debates" isActive={isActive('/debates')} label="Debates" />
-            <NavLink to="/arguments" isActive={isActive('/arguments')} label="Arguments" />
             <NavLink to="/insights" isActive={isActive('/insights')} label="Insights" />
             <NavLink to="/profile" isActive={isActive('/profile')} label="Profile" />
           </div>
@@ -120,7 +118,6 @@ const Navbar = () => {
         <div className="md:hidden pb-3 border-t border-gray-200 mt-2 flex flex-wrap gap-2">
           <MobileNavLink to="/dashboard" isActive={isActive('/dashboard')} label="Dashboard" />
           <MobileNavLink to="/debates" isActive={isActive('/debates')} label="Debates" />
-          <MobileNavLink to="/arguments" isActive={isActive('/arguments')} label="Arguments" />
           <MobileNavLink to="/insights" isActive={isActive('/insights')} label="Insights" />
           <MobileNavLink to="/profile" isActive={isActive('/profile')} label="Profile" />
         </div>

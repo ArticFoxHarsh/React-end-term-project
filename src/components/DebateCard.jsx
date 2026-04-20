@@ -30,7 +30,8 @@ import RatingStars from './RatingStars';
  *     outcome: string,
  *     rating: number,
  *     date: Timestamp | Date,
- *     notes: string
+ *     notes: string,
+ *     eventArgument: string
  *   }
  *   onEdit: (debateId) => void - Called when edit button is clicked
  *   onDelete: (debateId) => void - Called when delete button is clicked
@@ -104,6 +105,16 @@ const DebateCard = ({ debate, onEdit, onDelete }) => {
           <p className="text-sm text-gray-700">
             <span className="font-medium text-gray-900">Notes: </span>
             {debate.notes}
+          </p>
+        </div>
+      )}
+
+      {/* Cool Argument (if present) */}
+      {debate.eventArgument && (
+        <div className="mb-4 pb-4 border-b border-gray-200">
+          <p className="text-sm text-gray-700">
+            <span className="font-medium text-gray-900">Cool Argument: </span>
+            {debate.eventArgument}
           </p>
         </div>
       )}

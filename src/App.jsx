@@ -14,7 +14,6 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
-import { DebatesProvider } from './context/DebatesContext';
 import Navbar from './components/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
 import LoadingSpinner from './components/LoadingSpinner';
@@ -29,7 +28,6 @@ import DebateDetail from './pages/DebateDetail';
 import Profile from './pages/Profile';
 
 // Pages - Lazily loaded for code splitting (performance optimization)
-const Arguments = lazy(() => import('./pages/Arguments'));
 const Insights = lazy(() => import('./pages/Insights'));
 
 /**
@@ -61,14 +59,6 @@ const AppRoutes = () => (
       <Route path="/log" element={<LogDebate />} />
       <Route path="/debates" element={<Debates />} />
       <Route path="/debates/:id" element={<DebateDetail />} />
-      <Route
-        path="/arguments"
-        element={
-          <Suspense fallback={<LoadingFallback />}>
-            <Arguments />
-          </Suspense>
-        }
-      />
       <Route
         path="/insights"
         element={
@@ -102,10 +92,8 @@ export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <DebatesProvider>
-          <Navbar />
-          <AppRoutes />
-        </DebatesProvider>
+        <Navbar />
+        <AppRoutes />
       </BrowserRouter>
     </AuthProvider>
   );
