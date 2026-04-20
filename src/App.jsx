@@ -14,6 +14,7 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import { DebatesProvider } from './context/DebatesContext';
 import Navbar from './components/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
 import LoadingSpinner from './components/LoadingSpinner';
@@ -101,8 +102,10 @@ export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <Navbar />
-        <AppRoutes />
+        <DebatesProvider>
+          <Navbar />
+          <AppRoutes />
+        </DebatesProvider>
       </BrowserRouter>
     </AuthProvider>
   );

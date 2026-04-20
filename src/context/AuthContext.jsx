@@ -10,7 +10,7 @@
 
 import React, { createContext, useEffect, useState } from 'react';
 import { auth } from '../services/firebase';
-import { signOut } from 'firebase/auth';
+import { signOut, onAuthStateChanged } from 'firebase/auth';
 
 /**
  * AuthContext
@@ -47,22 +47,20 @@ export const AuthProvider = ({ children }) => {
    * This listener runs on app startup and whenever auth state changes
    */
   useEffect(() => {
-    // Set up listener for auth state changes
-    const unsubscribe = auth.onAuthStateChanged(
+    // Subscribe to Firebase auth state changes using modular API
+    const unsubscribe = onAuthStateChanged(
+      auth,
       (currentUser) => {
-        // Update user state when auth changes
         setUser(currentUser);
-        // Mark as loaded once we have initial state
         setLoading(false);
       },
       (error) => {
-        // Log auth errors but don't crash the app
         console.error('Auth state change error:', error);
         setLoading(false);
       }
     );
 
-    // Cleanup: unsubscribe from listener on unmount
+    // Cleanup: unsubscribe when component unmounts
     return () => unsubscribe();
   }, []);
 
