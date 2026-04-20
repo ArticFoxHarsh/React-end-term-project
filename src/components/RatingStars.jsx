@@ -82,7 +82,7 @@ const RatingStars = ({ value, onChange, size = 'md' }) => {
           <svg
             className={`${sizeClasses} ${
               star <= displayRating
-                ? 'fill-yellow-400 text-yellow-400'
+                ? 'fill-orange-400 text-orange-400'
                 : 'fill-gray-200 text-gray-200'
             }`}
             viewBox="0 0 20 20"

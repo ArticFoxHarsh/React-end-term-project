@@ -147,16 +147,16 @@ const Profile = () => {
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Page Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900">Profile</h1>
-          <p className="text-gray-600 mt-2">Manage your account settings and personal information</p>
+          <h1 className="text-4xl font-bold text-gray-900 uppercase">Profile</h1>
+          <p className="text-gray-600 mt-2 font-medium">Manage your account settings and personal information</p>
         </div>
 
         {/* Profile Card */}
         <div className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
           {/* Avatar Section */}
-          <div className="bg-gradient-to-r from-purple-600 to-purple-800 px-6 py-8 text-white">
+          <div className="bg-purple-600 px-6 py-8 text-gray-900 border-b border-gray-200">
             <div className="flex items-center gap-4">
-              <div className="w-16 h-16 bg-purple-700 rounded-full flex items-center justify-center text-2xl font-bold">
+              <div className="w-16 h-16 bg-white rounded-full border border-gray-200 flex items-center justify-center text-2xl font-bold">
                 {displayName
                   .split(' ')
                   .map((n) => n.charAt(0).toUpperCase())
@@ -164,7 +164,7 @@ const Profile = () => {
                   .slice(0, 2) || 'U'}
               </div>
               <div>
-                <p className="text-sm text-purple-200">Account Email</p>
+                <p className="text-sm text-gray-700 font-semibold uppercase tracking-wide">Account Email</p>
                 <p className="text-xl font-semibold">{user?.email}</p>
               </div>
             </div>
@@ -188,7 +188,7 @@ const Profile = () => {
 
             {/* Display Name Input */}
             <div>
-              <label htmlFor="displayName" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="displayName" className="block text-sm font-semibold uppercase tracking-wide text-gray-700 mb-1">
                 Display Name *
               </label>
               <input
@@ -203,12 +203,12 @@ const Profile = () => {
                 disabled={isSaving}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition disabled:bg-gray-100 disabled:cursor-not-allowed"
               />
-              <p className="text-xs text-gray-500 mt-1">This is how your name appears in the app</p>
+              <p className="text-xs text-gray-500 mt-1 font-medium">This is how your name appears in the app</p>
             </div>
 
             {/* Goals Textarea */}
             <div>
-              <label htmlFor="goals" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="goals" className="block text-sm font-semibold uppercase tracking-wide text-gray-700 mb-1">
                 Personal Goals (Optional)
               </label>
               <textarea
@@ -223,7 +223,7 @@ const Profile = () => {
                 disabled={isSaving}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition disabled:bg-gray-100 disabled:cursor-not-allowed resize-none"
               />
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="text-xs text-gray-500 mt-1 font-medium">
                 Add your personal goals to keep yourself motivated
               </p>
             </div>
@@ -232,7 +232,7 @@ const Profile = () => {
             <button
               type="submit"
               disabled={isSaving}
-              className="w-full py-3 px-4 bg-purple-600 hover:bg-purple-700 disabled:bg-purple-400 text-white font-medium rounded-lg transition-colors disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              className="w-full py-3 px-4 bg-purple-600 hover:bg-purple-700 disabled:bg-purple-400 text-white font-semibold rounded-lg transition-colors disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
               {isSaving ? (
                 <>
@@ -251,7 +251,7 @@ const Profile = () => {
 
         {/* Account Info Section */}
         <div className="mt-8 bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Account Information</h2>
+          <h2 className="text-lg font-semibold text-gray-900 mb-4 uppercase">Account Information</h2>
           <div className="space-y-4">
             <InfoRow label="Email Address" value={user?.email} />
             <InfoRow
@@ -284,7 +284,7 @@ const Profile = () => {
 
         {/* Help Section */}
         <div className="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-6">
-          <h3 className="text-lg font-semibold text-blue-900 mb-3">💡 Tips</h3>
+          <h3 className="text-lg font-semibold text-blue-900 mb-3 uppercase">💡 Tips</h3>
           <ul className="space-y-2 text-blue-800 text-sm">
             <li>• Update your display name to personalize your account</li>
             <li>• Set personal goals to track what you want to achieve</li>
@@ -303,10 +303,10 @@ const Profile = () => {
  */
 const InfoRow = ({ label, value, isCode = false }) => (
   <div className="flex flex-col md:flex-row md:items-center md:justify-between py-3 border-b border-gray-200 last:border-b-0">
-    <p className="text-sm font-medium text-gray-600">{label}</p>
+    <p className="text-sm font-semibold uppercase tracking-wide text-gray-600">{label}</p>
     <p
       className={`text-sm text-gray-900 mt-1 md:mt-0 ${
-        isCode ? 'font-mono text-xs bg-gray-100 px-2 py-1 rounded' : 'font-medium'
+        isCode ? 'font-mono text-xs bg-gray-100 px-2 py-1 rounded border border-gray-200' : 'font-semibold'
       }`}
     >
       {value}

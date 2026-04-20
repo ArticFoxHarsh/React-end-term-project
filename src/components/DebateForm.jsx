@@ -230,7 +230,7 @@ const DebateForm = ({ initialData, onSubmit, onCancel, isLoading }) => {
     <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl">
       {/* Topic Input */}
       <div>
-        <label htmlFor="topic" className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="topic" className="block text-sm font-semibold uppercase tracking-wide text-gray-700 mb-1">
           Debate Topic *
         </label>
         <input
@@ -248,7 +248,7 @@ const DebateForm = ({ initialData, onSubmit, onCancel, isLoading }) => {
 
       {/* Format Dropdown */}
       <div>
-        <label htmlFor="format" className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="format" className="block text-sm font-semibold uppercase tracking-wide text-gray-700 mb-1">
           Format *
         </label>
         <select
@@ -268,7 +268,7 @@ const DebateForm = ({ initialData, onSubmit, onCancel, isLoading }) => {
 
       {/* Side Dropdown */}
       <div>
-        <label htmlFor="side" className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="side" className="block text-sm font-semibold uppercase tracking-wide text-gray-700 mb-1">
           Which Side Did You Take? *
         </label>
         <select
@@ -287,7 +287,7 @@ const DebateForm = ({ initialData, onSubmit, onCancel, isLoading }) => {
 
       {/* Outcome Dropdown */}
       <div>
-        <label htmlFor="outcome" className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="outcome" className="block text-sm font-semibold uppercase tracking-wide text-gray-700 mb-1">
           Outcome *
         </label>
         <select
@@ -306,7 +306,7 @@ const DebateForm = ({ initialData, onSubmit, onCancel, isLoading }) => {
 
       {/* Date Input */}
       <div>
-        <label htmlFor="date" className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="date" className="block text-sm font-semibold uppercase tracking-wide text-gray-700 mb-1">
           Date of Debate *
         </label>
         <input
@@ -323,7 +323,7 @@ const DebateForm = ({ initialData, onSubmit, onCancel, isLoading }) => {
 
       {/* Rating Input */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="block text-sm font-semibold uppercase tracking-wide text-gray-700 mb-2">
           How Would You Rate This Debate? *
         </label>
         <div className="flex items-center gap-3">
@@ -332,7 +332,7 @@ const DebateForm = ({ initialData, onSubmit, onCancel, isLoading }) => {
             onChange={handleRatingChange}
             size="lg"
           />
-          <span className="text-sm text-gray-600">({formData.rating}/5)</span>
+          <span className="text-sm text-gray-600 font-medium">({formData.rating}/5)</span>
         </div>
         {errors.rating && <p className="text-red-600 text-sm mt-1">{errors.rating}</p>}
       </div>
@@ -340,7 +340,7 @@ const DebateForm = ({ initialData, onSubmit, onCancel, isLoading }) => {
       {/* Notes Textarea */}
       <div>
         <div className="flex items-center justify-between mb-1">
-          <label htmlFor="notes" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="notes" className="block text-sm font-semibold uppercase tracking-wide text-gray-700">
             Notes (Optional)
           </label>
           {isSupported && (
@@ -351,7 +351,7 @@ const DebateForm = ({ initialData, onSubmit, onCancel, isLoading }) => {
               className={`inline-flex items-center gap-2 px-3 py-1 rounded-lg text-sm font-medium transition-colors ${
                 isListening && activeSpeechField === 'notes'
                   ? 'bg-red-100 text-red-700 hover:bg-red-200'
-                  : 'bg-purple-100 text-purple-700 hover:bg-purple-200'
+                  : 'bg-blue-100 text-blue-700 hover:bg-blue-200'
               } disabled:opacity-50 disabled:cursor-not-allowed`}
             >
               <svg
@@ -392,7 +392,7 @@ const DebateForm = ({ initialData, onSubmit, onCancel, isLoading }) => {
 
         {/* Help text */}
         {isSupported && !isListening && (
-          <p className="text-xs text-gray-500 mt-2">💡 Click the "Speak" button to add your review via voice</p>
+          <p className="text-xs text-gray-500 mt-2">💡 Click Speak to capture your notes with voice</p>
         )}
         {isSupported && isListening && activeSpeechField === 'notes' && (
           <p className="text-xs text-red-600 mt-2">🎤 Microphone is active - speak now to add your review</p>
@@ -405,7 +405,7 @@ const DebateForm = ({ initialData, onSubmit, onCancel, isLoading }) => {
       {/* Cool Argument Section */}
       <div>
         <div className="flex items-center justify-between mb-1">
-          <label htmlFor="eventArgument" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="eventArgument" className="block text-sm font-semibold uppercase tracking-wide text-gray-700">
             Cool Argument From The Event (Optional)
           </label>
           {isSupported && (
@@ -416,7 +416,7 @@ const DebateForm = ({ initialData, onSubmit, onCancel, isLoading }) => {
               className={`inline-flex items-center gap-2 px-3 py-1 rounded-lg text-sm font-medium transition-colors ${
                 isListening && activeSpeechField === 'eventArgument'
                   ? 'bg-red-100 text-red-700 hover:bg-red-200'
-                  : 'bg-purple-100 text-purple-700 hover:bg-purple-200'
+                  : 'bg-blue-100 text-blue-700 hover:bg-blue-200'
               } disabled:opacity-50 disabled:cursor-not-allowed`}
             >
               <svg
@@ -471,7 +471,7 @@ const DebateForm = ({ initialData, onSubmit, onCancel, isLoading }) => {
         <button
           type="submit"
           disabled={isLoading}
-          className="flex-1 py-3 px-4 bg-purple-600 hover:bg-purple-700 disabled:bg-purple-400 text-white font-medium rounded-lg transition-colors disabled:cursor-not-allowed flex items-center justify-center gap-2"
+          className="flex-1 py-3 px-4 bg-purple-600 hover:bg-purple-700 disabled:bg-purple-400 text-white font-semibold rounded-lg transition-colors disabled:cursor-not-allowed flex items-center justify-center gap-2"
         >
           {isLoading ? (
             <>
@@ -489,7 +489,7 @@ const DebateForm = ({ initialData, onSubmit, onCancel, isLoading }) => {
           type="button"
           onClick={onCancel}
           disabled={isLoading}
-          className="px-6 py-3 border border-gray-300 text-gray-700 hover:bg-gray-50 font-medium rounded-lg transition-colors disabled:cursor-not-allowed"
+          className="px-6 py-3 border border-gray-300 text-gray-700 hover:bg-gray-50 font-semibold rounded-lg transition-colors disabled:cursor-not-allowed"
         >
           Cancel
         </button>

@@ -56,9 +56,9 @@ const EmptyState = ({ message, ctaText, ctaLink, onCtaClick }) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center py-12 px-4">
+    <div className="flex flex-col items-center justify-center py-12 px-4 bg-white rounded-lg border border-gray-200 shadow-sm">
       {/* Empty state icon */}
-      <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+      <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center mb-4 border border-gray-200">
         <svg
           className="w-8 h-8 text-gray-400"
           fill="none"
@@ -75,13 +75,13 @@ const EmptyState = ({ message, ctaText, ctaLink, onCtaClick }) => {
       </div>
 
       {/* Message */}
-      <p className="text-gray-600 text-center text-lg mb-6 max-w-sm">{message}</p>
+      <p className="text-gray-600 text-center text-lg mb-6 max-w-sm font-medium">{message}</p>
 
       {/* CTA Button */}
       {ctaText && (ctaLink || onCtaClick) && (
         <button
           onClick={handleCtaClick}
-          className="px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-lg transition-colors"
+          className="px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors"
         >
           {ctaText}
         </button>

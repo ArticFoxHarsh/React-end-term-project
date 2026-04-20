@@ -70,12 +70,12 @@ const DebateCard = ({ debate, onEdit, onDelete }) => {
   };
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 hover:shadow-md transition-shadow p-6">
+    <div className="bg-white rounded-lg border border-gray-200 hover:shadow-md transition-shadow p-5 sm:p-6">
       {/* Header: Topic and Format */}
       <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3 mb-4">
         <div className="flex-1 min-w-0">
-          <h3 className="text-lg font-semibold text-gray-900 truncate">{debate.topic}</h3>
-          <p className="text-sm text-gray-600 mt-1">
+          <h3 className="text-lg font-semibold text-gray-900 truncate uppercase tracking-wide">{debate.topic}</h3>
+          <p className="text-sm text-gray-600 mt-1 font-medium">
             Side: <span className="font-medium">{debate.side}</span>
           </p>
         </div>
@@ -83,7 +83,7 @@ const DebateCard = ({ debate, onEdit, onDelete }) => {
       </div>
 
       {/* Details Row: Outcome, Rating, Date */}
-      <div className="flex flex-col md:flex-row md:items-center gap-4 mb-4 pb-4 border-b border-gray-200">
+      <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 mb-4 pb-4 border-b border-gray-200">
         {/* Outcome Badge */}
         <OutcomeBadge outcome={debate.outcome} />
 
@@ -94,7 +94,7 @@ const DebateCard = ({ debate, onEdit, onDelete }) => {
         </div>
 
         {/* Date */}
-        <div className="text-sm text-gray-600 ml-auto">
+        <div className="text-sm text-gray-600 sm:ml-auto font-medium">
           {formatDate(debate.date)}
         </div>
       </div>
@@ -120,16 +120,16 @@ const DebateCard = ({ debate, onEdit, onDelete }) => {
       )}
 
       {/* Action Buttons */}
-      <div className="flex gap-2 justify-end">
+      <div className="flex gap-2 justify-end flex-wrap">
         <button
           onClick={() => onEdit(debate.id)}
-          className="px-4 py-2 text-sm font-medium text-purple-600 hover:bg-purple-50 rounded-lg transition-colors border border-purple-200"
+          className="px-4 py-2 text-sm font-semibold text-purple-600 hover:bg-purple-50 rounded-lg transition-colors border border-purple-200"
         >
           Edit
         </button>
         <button
           onClick={() => onDelete(debate.id)}
-          className="px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 rounded-lg transition-colors border border-red-200"
+          className="px-4 py-2 text-sm font-semibold text-red-600 hover:bg-red-50 rounded-lg transition-colors border border-red-200"
         >
           Delete
         </button>

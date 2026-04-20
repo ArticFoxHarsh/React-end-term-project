@@ -111,13 +111,13 @@ const Dashboard = () => {
         <div className="mb-8">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
-              <h1 className="text-4xl font-bold text-gray-900">Dashboard</h1>
-              <p className="text-gray-600 mt-2">Track your competitive speaking journey</p>
+              <h1 className="text-4xl font-bold text-gray-900 uppercase">Dashboard</h1>
+              <p className="text-gray-600 mt-2 font-medium">Track your competitive speaking journey</p>
             </div>
             {/* CTA Button */}
             <button
               onClick={() => navigate('/log')}
-              className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-lg transition-colors flex items-center gap-2 justify-center md:justify-start"
+              className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors flex items-center gap-2 justify-center md:justify-start"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
@@ -134,7 +134,7 @@ const Dashboard = () => {
 
         {/* Statistics Row */}
         {stats.totalDebates > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-8">
             {/* Total Debates Stat */}
             <StatCard
               label="Total Debates"
@@ -161,9 +161,9 @@ const Dashboard = () => {
         {/* Recent Debates Section */}
         <div>
           <div className="mb-6">
-            <h2 className="text-2xl font-bold text-gray-900">Recent Debates</h2>
+            <h2 className="text-2xl font-bold text-gray-900 uppercase">Recent Debates</h2>
             {stats.recentDebates.length > 0 && (
-              <p className="text-gray-600 mt-1">
+              <p className="text-gray-600 mt-1 font-medium">
                 Showing {stats.recentDebates.length} of {stats.totalDebates} debate{stats.totalDebates !== 1 ? 's' : ''}
               </p>
             )}
@@ -186,7 +186,7 @@ const Dashboard = () => {
                 <div className="flex justify-center pt-4">
                   <button
                     onClick={() => navigate('/debates')}
-                    className="px-6 py-2 text-purple-600 hover:bg-purple-50 border border-purple-600 rounded-lg font-medium transition-colors"
+                    className="px-6 py-2 text-purple-600 hover:bg-purple-50 border border-purple-600 rounded-lg font-semibold transition-colors"
                   >
                     View All Debates →
                   </button>
@@ -214,10 +214,10 @@ const StatCard = ({ label, value, icon }) => (
   <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm hover:shadow-md transition-shadow">
     <div className="flex items-center justify-between">
       <div>
-        <p className="text-gray-600 text-sm font-medium">{label}</p>
+        <p className="text-gray-600 text-sm font-semibold uppercase tracking-wide">{label}</p>
         <p className="text-3xl font-bold text-gray-900 mt-2">{value}</p>
       </div>
-      <div className="text-4xl">{icon}</div>
+      <div className="text-3xl bg-purple-100 border border-gray-200 rounded-lg w-14 h-14 flex items-center justify-center">{icon}</div>
     </div>
   </div>
 );

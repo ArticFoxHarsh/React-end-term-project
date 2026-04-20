@@ -42,14 +42,14 @@ const OutcomeBadge = ({ outcome }) => {
         };
       case 'Draw':
         return {
-          bg: 'bg-gray-100',
-          text: 'text-gray-800',
+          bg: 'bg-blue-100',
+          text: 'text-blue-800',
           dot: 'bg-gray-500',
         };
       default:
         return {
-          bg: 'bg-gray-100',
-          text: 'text-gray-800',
+          bg: 'bg-blue-100',
+          text: 'text-blue-800',
           dot: 'bg-gray-500',
         };
     }
@@ -58,7 +58,7 @@ const OutcomeBadge = ({ outcome }) => {
   const styles = getStyles();
 
   return (
-    <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium ${styles.bg} ${styles.text}`}>
+    <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-lg border border-gray-200 shadow-sm text-sm font-semibold uppercase tracking-wide ${styles.bg} ${styles.text}`}>
       <div className={`w-2 h-2 rounded-full ${styles.dot}`}></div>
       {outcome}
     </div>

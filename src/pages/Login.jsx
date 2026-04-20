@@ -14,7 +14,7 @@
  */
 
 import React, { useState, useEffect, useContext } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../services/firebase';
 import AuthContext from '../context/AuthContext';
@@ -27,7 +27,6 @@ import AuthContext from '../context/AuthContext';
  */
 const Login = () => {
   const navigate = useNavigate();
-  const location = useLocation();
   const { user } = useContext(AuthContext);
 
   // Form state
@@ -102,15 +101,23 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-gray-100 flex items-center justify-center px-4 py-12">
-      <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
+    <div className="min-h-screen relative overflow-hidden flex items-center justify-center px-4 py-10 sm:py-14">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-8 left-4 w-28 h-28 bg-purple-100 rounded-lg rotate-12 border border-gray-200"></div>
+        <div className="absolute bottom-10 right-6 w-24 h-24 bg-green-100 rounded-lg -rotate-12 border border-gray-200"></div>
+      </div>
+
+      <div className="relative w-full max-w-md bg-white rounded-lg border border-gray-200 shadow-lg p-6 sm:p-8">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="inline-block w-12 h-12 bg-gradient-to-br from-purple-600 to-purple-800 rounded-lg flex items-center justify-center mb-4">
-            <span className="text-white text-lg font-bold">D</span>
+          <p className="inline-block text-xs font-semibold uppercase tracking-widest bg-purple-100 text-purple-700 px-3 py-1 rounded-lg mb-4 border border-gray-200">
+            Competitive Speaking Tracker
+          </p>
+          <div className="inline-block w-14 h-14 bg-purple-600 rounded-lg flex items-center justify-center mb-4">
+            <span className="text-gray-900 text-lg font-bold">DV</span>
           </div>
           <h1 className="text-3xl font-bold text-gray-900">DebateVault</h1>
-          <p className="text-gray-600 mt-2">Competitive Speaking Tracker</p>
+          <p className="text-gray-600 mt-2">Step into your neon debate control room</p>
         </div>
 
         {/* Login Form */}
@@ -149,7 +156,7 @@ const Login = () => {
 
           {/* Error Message */}
           {error && (
-            <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+            <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm font-medium">
               {error}
             </div>
           )}
@@ -180,7 +187,7 @@ const Login = () => {
             <div className="w-full border-t border-gray-300"></div>
           </div>
           <div className="relative flex justify-center text-sm">
-            <span className="px-2 bg-white text-gray-500">New to DebateVault?</span>
+            <span className="px-3 bg-white text-gray-500">New to DebateVault?</span>
           </div>
         </div>
 
@@ -194,9 +201,11 @@ const Login = () => {
         </button>
 
         {/* Info Text */}
-        <p className="text-center text-xs text-gray-500 mt-6">
-          This is a secure Firebase application. Your data is encrypted and protected.
-        </p>
+        <div className="mt-6 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+          <p className="text-center text-xs text-blue-800 font-medium">
+            Secure Firebase auth is enabled. Your data is encrypted and protected.
+          </p>
+        </div>
       </div>
     </div>
   );

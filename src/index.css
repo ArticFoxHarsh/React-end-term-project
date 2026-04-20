@@ -1,6 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --nb-bg: #ede4ff;
+  --nb-bg-alt: #fdf7ff;
+  --nb-card: #fffdf4;
+  --nb-ink: #111111;
+  --nb-muted: #3e3a52;
+  --nb-accent: #00f5d4;
+  --nb-accent-strong: #00d4b7;
+  --nb-secondary: #d7ff4d;
+  --nb-tertiary: #ff4fd8;
+  --nb-danger: #ff5f6d;
+  --nb-success: #24d17f;
+  --nb-border: #111111;
+  --nb-shadow: #111111;
+}
 
 * {
   margin: 0;
@@ -13,11 +31,178 @@ html {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: var(--nb-ink);
+  background:
+    radial-gradient(circle at 90% 10%, rgba(255, 79, 216, 0.35) 0%, rgba(255, 79, 216, 0) 32%),
+    radial-gradient(circle at 10% 85%, rgba(0, 245, 212, 0.28) 0%, rgba(0, 245, 212, 0) 30%),
+    linear-gradient(135deg, var(--nb-bg) 0%, var(--nb-bg-alt) 45%, #fff5cf 100%);
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+.font-bold {
+  font-family: 'Archivo Black', sans-serif;
+  letter-spacing: 0.02em;
+}
+
+p,
+label,
+input,
+textarea,
+select,
+button {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+button {
+  border: 3px solid var(--nb-border);
+  box-shadow: 5px 5px 0 var(--nb-shadow);
+  transition: transform 140ms ease, box-shadow 140ms ease, background-color 140ms ease, color 140ms ease;
+}
+
+button:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0 var(--nb-shadow);
+}
+
+button:active {
+  transform: translate(0, 0);
+  box-shadow: 2px 2px 0 var(--nb-shadow);
+}
+
+input,
+textarea,
+select {
+  border: 3px solid var(--nb-border) !important;
+  box-shadow: 4px 4px 0 var(--nb-shadow);
+  border-radius: 12px !important;
+  background: #ffffff !important;
+  color: var(--nb-ink) !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 3px solid var(--nb-accent) !important;
+  outline-offset: 1px;
+}
+
+/* Core color remap for current utility classes */
+.bg-gray-50 {
+  background: transparent !important;
+}
+
+.bg-white {
+  background: var(--nb-card) !important;
+}
+
+.text-gray-900 {
+  color: var(--nb-ink) !important;
+}
+
+.text-gray-700,
+.text-gray-600,
+.text-gray-500,
+.text-gray-400 {
+  color: var(--nb-muted) !important;
+}
+
+.border-gray-200,
+.border-gray-300 {
+  border-color: var(--nb-border) !important;
+  border-width: 3px !important;
+}
+
+.shadow-sm,
+.shadow-md,
+.shadow-lg {
+  box-shadow: 6px 6px 0 var(--nb-shadow) !important;
+}
+
+.bg-purple-600 {
+  background: var(--nb-accent) !important;
+  color: var(--nb-ink) !important;
+}
+
+.hover\:bg-purple-700:hover {
+  background: var(--nb-secondary) !important;
+}
+
+.disabled\:bg-purple-400:disabled {
+  background: #a0f7ea !important;
+  color: #26403a !important;
+}
+
+.text-purple-600,
+.text-purple-700,
+.text-purple-800 {
+  color: #7f0a79 !important;
+}
+
+.bg-purple-100,
+.bg-purple-50 {
+  background: #ffd8f7 !important;
+}
+
+.border-purple-600,
+.border-purple-200 {
+  border-color: var(--nb-border) !important;
+}
+
+.bg-red-50,
+.bg-green-50,
+.bg-blue-50 {
+  border-width: 3px !important;
+  border-color: var(--nb-border) !important;
+  box-shadow: 5px 5px 0 var(--nb-shadow);
+}
+
+.rounded-lg,
+.rounded-md,
+.rounded-full {
+  border-radius: 14px !important;
+}
+
+/* Mobile tuning: keep brutalism while reducing visual crowding */
+@media (max-width: 768px) {
+  h1,
+  h2,
+  h3,
+  .font-bold {
+    letter-spacing: 0.01em;
+  }
+
+  button {
+    box-shadow: 3px 3px 0 var(--nb-shadow);
+  }
+
+  button:hover {
+    transform: none;
+    box-shadow: 4px 4px 0 var(--nb-shadow);
+  }
+
+  input,
+  textarea,
+  select,
+  .shadow-sm,
+  .shadow-md,
+  .shadow-lg {
+    box-shadow: 3px 3px 0 var(--nb-shadow) !important;
+  }
+
+  .border-gray-200,
+  .border-gray-300 {
+    border-width: 2px !important;
+  }
 }
 
 code {

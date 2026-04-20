@@ -73,22 +73,25 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+    <nav className="sticky top-0 z-50 px-3 pt-3 sm:px-4 sm:pt-4">
+      <div className="max-w-7xl mx-auto bg-white border border-gray-200 rounded-lg shadow-lg">
+        <div className="flex items-center justify-between gap-3 px-4 py-3 sm:px-6">
           {/* Logo / Brand */}
           <Link
             to="/dashboard"
-            className="flex items-center gap-2 font-bold text-2xl text-gray-900 hover:text-purple-600 transition-colors"
+            className="flex items-center gap-3 font-bold text-xl sm:text-2xl text-gray-900"
           >
-            <div className="w-8 h-8 bg-gradient-to-br from-purple-600 to-purple-800 rounded-lg flex items-center justify-center">
-              <span className="text-white text-sm font-bold">D</span>
+            <div className="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center">
+              <span className="text-gray-900 text-sm font-bold">DV</span>
             </div>
-            <span>DebateVault</span>
+            <div className="leading-tight">
+              <span className="block">DebateVault</span>
+              <span className="text-xs text-gray-600 font-medium tracking-wide uppercase">Neon Arena</span>
+            </div>
           </Link>
 
           {/* Navigation Links - Desktop */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden md:flex items-center gap-2">
             <NavLink to="/dashboard" isActive={isActive('/dashboard')} label="Dashboard" />
             <NavLink to="/debates" isActive={isActive('/debates')} label="Debates" />
             <NavLink to="/insights" isActive={isActive('/insights')} label="Insights" />
@@ -96,18 +99,14 @@ const Navbar = () => {
           </div>
 
           {/* User Menu */}
-          <div className="flex items-center gap-4">
-            {/* User Avatar */}
-            <div className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center text-white text-sm font-semibold">
-                {getInitials(user?.displayName || user?.email)}
-              </div>
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center text-gray-900 text-sm font-semibold border border-gray-200">
+              {getInitials(user?.displayName || user?.email)}
             </div>
 
-            {/* Logout Button */}
             <button
               onClick={handleLogout}
-              className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+              className="px-3 py-2 text-sm font-semibold text-gray-900 bg-gray-100 hover:bg-gray-200 rounded-lg"
             >
               Logout
             </button>
@@ -115,11 +114,13 @@ const Navbar = () => {
         </div>
 
         {/* Navigation Links - Mobile */}
-        <div className="md:hidden pb-3 border-t border-gray-200 mt-2 flex flex-wrap gap-2">
-          <MobileNavLink to="/dashboard" isActive={isActive('/dashboard')} label="Dashboard" />
-          <MobileNavLink to="/debates" isActive={isActive('/debates')} label="Debates" />
-          <MobileNavLink to="/insights" isActive={isActive('/insights')} label="Insights" />
-          <MobileNavLink to="/profile" isActive={isActive('/profile')} label="Profile" />
+        <div className="md:hidden border-t border-gray-200 px-4 pb-3 pt-2 mt-1">
+          <div className="flex gap-2 overflow-x-auto pb-1">
+            <MobileNavLink to="/dashboard" isActive={isActive('/dashboard')} label="Dashboard" />
+            <MobileNavLink to="/debates" isActive={isActive('/debates')} label="Debates" />
+            <MobileNavLink to="/insights" isActive={isActive('/insights')} label="Insights" />
+            <MobileNavLink to="/profile" isActive={isActive('/profile')} label="Profile" />
+          </div>
         </div>
       </div>
     </nav>
@@ -133,10 +134,10 @@ const Navbar = () => {
 const NavLink = ({ to, isActive, label }) => (
   <Link
     to={to}
-    className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+    className={`px-3 py-2 text-sm font-semibold rounded-md border border-gray-200 shadow-sm transition-colors ${
       isActive
-        ? 'bg-purple-50 text-purple-600'
-        : 'text-gray-700 hover:bg-gray-100'
+        ? 'bg-purple-600 text-gray-900'
+        : 'text-gray-700 bg-white hover:bg-gray-100'
     }`}
   >
     {label}
@@ -150,10 +151,10 @@ const NavLink = ({ to, isActive, label }) => (
 const MobileNavLink = ({ to, isActive, label }) => (
   <Link
     to={to}
-    className={`px-3 py-1 text-sm font-medium rounded-md transition-colors ${
+    className={`px-3 py-1.5 whitespace-nowrap text-sm font-semibold rounded-md border border-gray-200 shadow-sm transition-colors ${
       isActive
-        ? 'bg-purple-600 text-white'
-        : 'text-gray-700 bg-gray-100 hover:bg-gray-200'
+        ? 'bg-purple-600 text-gray-900'
+        : 'text-gray-700 bg-white hover:bg-gray-100'
     }`}
   >
     {label}
