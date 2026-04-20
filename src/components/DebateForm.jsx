@@ -6,6 +6,7 @@
  * - Create mode: initialData is null, calls addDebate on submit
  * - Edit mode: initialData is provided, calls updateDebate on submit
  * - Speech-to-text in notes field
+ * - Cool argument capture for the event
  * 
  * Props:
  *   initialData: object | null - Pre-fill form if editing, null for new debate
@@ -14,7 +15,7 @@
  *   isLoading: boolean - Show loading state while submitting
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import RatingStars from './RatingStars';
 import useSpeechRecognition from '../hooks/useSpeechRecognition';
 
@@ -33,6 +34,7 @@ import useSpeechRecognition from '../hooks/useSpeechRecognition';
  *     outcome: string,
  *     rating: number,
  *     notes: string,
+ *     eventArgument: string,
  *     date: Date | Timestamp
  *   } | null
  *   onSubmit: (formData) => Promise<void>
@@ -57,6 +59,7 @@ import useSpeechRecognition from '../hooks/useSpeechRecognition';
  */
 const DebateForm = ({ initialData, onSubmit, onCancel, isLoading }) => {
   const { isListening, transcript, interimTranscript, isSupported, startListening, stopListening } = useSpeechRecognition();
+  const speechTargetRef = useRef(null);
 
   // Form state
   const [formData, setFormData] = useState({
@@ -66,11 +69,13 @@ const DebateForm = ({ initialData, onSubmit, onCancel, isLoading }) => {
     outcome: 'Win',
     rating: 3,
     notes: '',
+    eventArgument: '',
     date: new Date().toISOString().split('T')[0],
   });
 
   const [errors, setErrors] = useState({});
   const [submitError, setSubmitError] = useState('');
+  const [activeSpeechField, setActiveSpeechField] = useState(null);
 
   /**
    * Pre-fill form with initialData if in edit mode
@@ -88,34 +93,51 @@ const DebateForm = ({ initialData, onSubmit, onCancel, isLoading }) => {
         outcome: initialData.outcome || 'Win',
         rating: initialData.rating || 3,
         notes: initialData.notes || '',
+        eventArgument: initialData.eventArgument || '',
         date: debateDate.toISOString().split('T')[0],
       });
     }
   }, [initialData]);
 
   /**
-   * Update notes when transcript changes
-   * Appends speech transcript to notes when user stops speaking
+   * Update active target field when transcript is finalized
+   * Appends speech transcript to the field selected when recording started
    */
   useEffect(() => {
-    if (transcript && !isListening) {
-      console.log('📝 Adding transcript to notes:', transcript);
+    if (transcript && !isListening && speechTargetRef.current) {
+      const targetField = speechTargetRef.current;
+      console.log(`📝 Adding transcript to ${targetField}:`, transcript);
       setFormData((prev) => ({
         ...prev,
-        notes: prev.notes ? prev.notes + ' ' + transcript : transcript,
+        [targetField]: prev[targetField] ? prev[targetField] + ' ' + transcript : transcript,
       }));
+      speechTargetRef.current = null;
     }
   }, [isListening, transcript]);
 
-  /**
-   * Toggle speech recognition on/off
-   */
-  const handleToggleSpeech = () => {
-    if (isListening) {
-      stopListening();
-    } else {
-      startListening();
+  useEffect(() => {
+    if (!isListening && activeSpeechField) {
+      setActiveSpeechField(null);
     }
+  }, [isListening, activeSpeechField]);
+
+  /**
+   * Toggle speech recognition on/off for a specific form field
+   */
+  const handleToggleSpeech = (fieldName) => {
+    if (isListening && activeSpeechField === fieldName) {
+      stopListening();
+      return;
+    }
+
+    // Keep one recording session at a time to avoid conflicts
+    if (isListening && activeSpeechField !== fieldName) {
+      return;
+    }
+
+    speechTargetRef.current = fieldName;
+    setActiveSpeechField(fieldName);
+    startListening();
   };
 
   /**
@@ -324,17 +346,17 @@ const DebateForm = ({ initialData, onSubmit, onCancel, isLoading }) => {
           {isSupported && (
             <button
               type="button"
-              onClick={handleToggleSpeech}
+              onClick={() => handleToggleSpeech('notes')}
               disabled={isLoading}
               className={`inline-flex items-center gap-2 px-3 py-1 rounded-lg text-sm font-medium transition-colors ${
-                isListening
+                isListening && activeSpeechField === 'notes'
                   ? 'bg-red-100 text-red-700 hover:bg-red-200'
                   : 'bg-purple-100 text-purple-700 hover:bg-purple-200'
               } disabled:opacity-50 disabled:cursor-not-allowed`}
             >
               <svg
-                className={`w-4 h-4 ${isListening ? 'animate-pulse' : ''}`}
-                fill={isListening ? 'currentColor' : 'none'}
+                className={`w-4 h-4 ${isListening && activeSpeechField === 'notes' ? 'animate-pulse' : ''}`}
+                fill={isListening && activeSpeechField === 'notes' ? 'currentColor' : 'none'}
                 stroke="currentColor"
                 viewBox="0 0 24 24"
               >
@@ -345,7 +367,7 @@ const DebateForm = ({ initialData, onSubmit, onCancel, isLoading }) => {
                   d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 016 0v6a3 3 0 01-3 3z"
                 />
               </svg>
-              {isListening ? 'Listening...' : '🎤 Speak'}
+              {isListening && activeSpeechField === 'notes' ? 'Listening...' : '🎤 Speak'}
             </button>
           )}
         </div>
@@ -362,7 +384,7 @@ const DebateForm = ({ initialData, onSubmit, onCancel, isLoading }) => {
         />
 
         {/* Interim transcript preview while speaking */}
-        {isListening && interimTranscript && (
+        {isListening && activeSpeechField === 'notes' && interimTranscript && (
           <div className="mt-2 p-2 bg-blue-50 border border-blue-200 rounded text-sm text-blue-800 italic">
             🎤 You're saying: "{interimTranscript}"
           </div>
@@ -372,11 +394,68 @@ const DebateForm = ({ initialData, onSubmit, onCancel, isLoading }) => {
         {isSupported && !isListening && (
           <p className="text-xs text-gray-500 mt-2">💡 Click the "Speak" button to add your review via voice</p>
         )}
-        {isSupported && isListening && (
+        {isSupported && isListening && activeSpeechField === 'notes' && (
           <p className="text-xs text-red-600 mt-2">🎤 Microphone is active - speak now to add your review</p>
         )}
         {!isSupported && (
           <p className="text-xs text-yellow-600 mt-2">⚠️ Speech recognition not supported in your browser. Please use Chrome, Edge, or Safari.</p>
+        )}
+      </div>
+
+      {/* Cool Argument Section */}
+      <div>
+        <div className="flex items-center justify-between mb-1">
+          <label htmlFor="eventArgument" className="block text-sm font-medium text-gray-700">
+            Cool Argument From The Event (Optional)
+          </label>
+          {isSupported && (
+            <button
+              type="button"
+              onClick={() => handleToggleSpeech('eventArgument')}
+              disabled={isLoading}
+              className={`inline-flex items-center gap-2 px-3 py-1 rounded-lg text-sm font-medium transition-colors ${
+                isListening && activeSpeechField === 'eventArgument'
+                  ? 'bg-red-100 text-red-700 hover:bg-red-200'
+                  : 'bg-purple-100 text-purple-700 hover:bg-purple-200'
+              } disabled:opacity-50 disabled:cursor-not-allowed`}
+            >
+              <svg
+                className={`w-4 h-4 ${isListening && activeSpeechField === 'eventArgument' ? 'animate-pulse' : ''}`}
+                fill={isListening && activeSpeechField === 'eventArgument' ? 'currentColor' : 'none'}
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 016 0v6a3 3 0 01-3 3z"
+                />
+              </svg>
+              {isListening && activeSpeechField === 'eventArgument' ? 'Listening...' : '🎤 Speak'}
+            </button>
+          )}
+        </div>
+
+        <textarea
+          id="eventArgument"
+          name="eventArgument"
+          value={formData.eventArgument}
+          onChange={handleChange}
+          placeholder="Write the best argument you made or heard in this event..."
+          rows="3"
+          disabled={isLoading}
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition disabled:bg-gray-100 disabled:cursor-not-allowed resize-none"
+        />
+
+        {isListening && activeSpeechField === 'eventArgument' && interimTranscript && (
+          <div className="mt-2 p-2 bg-blue-50 border border-blue-200 rounded text-sm text-blue-800 italic">
+            🎤 You're saying: "{interimTranscript}"
+          </div>
+        )}
+
+        {isSupported && isListening && activeSpeechField === 'eventArgument' && (
+          <p className="text-xs text-red-600 mt-2">🎤 Microphone is active - speak your cool argument now</p>
         )}
       </div>
 
