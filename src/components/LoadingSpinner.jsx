@@ -47,7 +47,7 @@ const LoadingSpinner = ({ text, size = 'md' }) => {
       <div className={`${sizeClasses} relative`}>
         {/* Background circle */}
         <svg
-          className="w-full h-full text-gray-200"
+          className="w-full h-full text-gray-300"
           fill="none"
           viewBox="0 0 24 24"
         >
@@ -69,7 +69,7 @@ const LoadingSpinner = ({ text, size = 'md' }) => {
       </div>
 
       {/* Optional loading text */}
-      {text && <p className="text-gray-600 text-sm font-medium">{text}</p>}
+      {text && <p className="text-gray-700 text-sm font-semibold">{text}</p>}
     </div>
   );
 };

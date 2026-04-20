@@ -26,7 +26,6 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
 } from 'recharts';
 import useDebates from '../hooks/useDebates';
@@ -35,10 +34,11 @@ import EmptyState from '../components/EmptyState';
 
 // Chart colors
 const COLORS = {
-  Win: '#10b981',
-  Loss: '#ef4444',
-  Draw: '#6b7280',
-  line: '#534AB7',
+  Win: '#24d17f',
+  Loss: '#ff5f6d',
+  Draw: '#00b4d8',
+  line: '#ff4fd8',
+  bar: '#00f5d4',
 };
 
 /**
@@ -150,8 +150,8 @@ const Insights = () => {
       <div className="min-h-screen bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="mb-8">
-            <h1 className="text-4xl font-bold text-gray-900">Insights</h1>
-            <p className="text-gray-600 mt-2">Analyze your competitive speaking performance</p>
+            <h1 className="text-4xl font-bold text-gray-900 uppercase">Insights</h1>
+            <p className="text-gray-600 mt-2 font-medium">Analyze your competitive speaking performance</p>
           </div>
           <EmptyState
             message="No debates logged yet. Start logging your debates to see insights and analytics!"
@@ -168,8 +168,8 @@ const Insights = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Page Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900">Insights</h1>
-          <p className="text-gray-600 mt-2">Analyze your competitive speaking performance</p>
+          <h1 className="text-4xl font-bold text-gray-900 uppercase">Insights</h1>
+          <p className="text-gray-600 mt-2 font-medium">Analyze your competitive speaking performance</p>
         </div>
 
         {/* Summary Stats */}
@@ -199,10 +199,11 @@ const Insights = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Win Rate Over Time */}
           <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Win Rate Over Time</h2>
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={winRateData} margin={{ top: 5, right: 30, left: 0, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+            <h2 className="text-lg font-semibold text-gray-900 mb-4 uppercase">Win Rate Over Time</h2>
+            <div className="h-72 sm:h-[300px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={winRateData} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#9b8db8" />
                 <XAxis
                   dataKey="date"
                   tick={{ fontSize: 12 }}
@@ -222,24 +223,26 @@ const Insights = () => {
                   }}
                   formatter={(value) => `${value}%`}
                 />
-                <Line
-                  type="monotone"
-                  dataKey="winRate"
-                  stroke={COLORS.line}
-                  dot={{ fill: COLORS.line, r: 4 }}
-                  activeDot={{ r: 6 }}
-                  strokeWidth={2}
-                  isAnimationActive={true}
-                />
-              </LineChart>
-            </ResponsiveContainer>
+                  <Line
+                    type="monotone"
+                    dataKey="winRate"
+                    stroke={COLORS.line}
+                    dot={{ fill: COLORS.line, r: 4 }}
+                    activeDot={{ r: 6 }}
+                    strokeWidth={3}
+                    isAnimationActive={true}
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
           </div>
 
           {/* Outcomes Breakdown */}
           <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Outcomes Breakdown</h2>
-            <ResponsiveContainer width="100%" height={300}>
-              <PieChart>
+            <h2 className="text-lg font-semibold text-gray-900 mb-4 uppercase">Outcomes Breakdown</h2>
+            <div className="h-72 sm:h-[300px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
                 <Pie
                   data={outcomeData}
                   cx="50%"
@@ -248,7 +251,7 @@ const Insights = () => {
                   label={({ name, value, percent }) =>
                     `${name}: ${value} (${(percent * 100).toFixed(0)}%)`
                   }
-                  outerRadius={100}
+                  outerRadius={95}
                   fill="#8884d8"
                   dataKey="value"
                   isAnimationActive={true}
@@ -257,22 +260,24 @@ const Insights = () => {
                     <Cell key={`cell-${entry.name}`} fill={COLORS[entry.name]} />
                   ))}
                 </Pie>
-                <Tooltip
-                  formatter={(value) => `${value} debate${value !== 1 ? 's' : ''}`}
-                />
-              </PieChart>
-            </ResponsiveContainer>
+                  <Tooltip
+                    formatter={(value) => `${value} debate${value !== 1 ? 's' : ''}`}
+                  />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
           </div>
 
           {/* Top Topics */}
           <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm lg:col-span-2">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Top Debate Topics</h2>
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart
-                data={topicsData}
-                margin={{ top: 5, right: 30, left: 0, bottom: 80 }}
-              >
-                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+            <h2 className="text-lg font-semibold text-gray-900 mb-4 uppercase">Top Debate Topics</h2>
+            <div className="h-80 sm:h-[320px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart
+                  data={topicsData}
+                  margin={{ top: 5, right: 20, left: 0, bottom: 80 }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" stroke="#9b8db8" />
                 <XAxis
                   dataKey="topic"
                   tick={{ fontSize: 12 }}
@@ -294,20 +299,23 @@ const Insights = () => {
                   }}
                   formatter={(value) => `${value} debate${value !== 1 ? 's' : ''}`}
                 />
-                <Bar
-                  dataKey="count"
-                  fill={COLORS.line}
-                  radius={[8, 8, 0, 0]}
-                  isAnimationActive={true}
-                />
-              </BarChart>
-            </ResponsiveContainer>
+                  <Bar
+                    dataKey="count"
+                    fill={COLORS.bar}
+                    stroke="#111111"
+                    strokeWidth={2}
+                    radius={[8, 8, 0, 0]}
+                    isAnimationActive={true}
+                  />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
           </div>
         </div>
 
         {/* Insights Summary */}
         <div className="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-6">
-          <h3 className="text-lg font-semibold text-blue-900 mb-3">📈 Key Insights</h3>
+          <h3 className="text-lg font-semibold text-blue-900 mb-3 uppercase">📈 Key Insights</h3>
           <ul className="space-y-2 text-blue-800">
             <li>
               • You've logged <strong>{debates.length}</strong> debate{debates.length !== 1 ? 's' : ''}
@@ -343,10 +351,10 @@ const SummaryCard = ({ label, value, icon }) => (
   <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm hover:shadow-md transition-shadow">
     <div className="flex items-center justify-between">
       <div>
-        <p className="text-gray-600 text-sm font-medium">{label}</p>
+        <p className="text-gray-600 text-sm font-semibold uppercase tracking-wide">{label}</p>
         <p className="text-3xl font-bold text-gray-900 mt-2">{value}</p>
       </div>
-      <div className="text-4xl">{icon}</div>
+      <div className="text-3xl bg-purple-100 border border-gray-200 rounded-lg w-14 h-14 flex items-center justify-center">{icon}</div>
     </div>
   </div>
 );

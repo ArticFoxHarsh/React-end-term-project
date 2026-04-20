@@ -36,14 +36,14 @@ const FilterBar = ({ filters, onChange }) => {
     <div className="flex flex-col md:flex-row gap-4">
       {/* Format Filter */}
       <div className="flex-1">
-        <label htmlFor="format-filter" className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="format-filter" className="block text-sm font-semibold uppercase tracking-wide text-gray-700 mb-1">
           Format
         </label>
         <select
           id="format-filter"
           value={filters.format || ''}
           onChange={(e) => onChange('format', e.target.value || null)}
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition bg-white"
+          className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition bg-white"
         >
           <option value="">All Formats</option>
           {formats.map((format) => (
@@ -56,14 +56,14 @@ const FilterBar = ({ filters, onChange }) => {
 
       {/* Outcome Filter */}
       <div className="flex-1">
-        <label htmlFor="outcome-filter" className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="outcome-filter" className="block text-sm font-semibold uppercase tracking-wide text-gray-700 mb-1">
           Outcome
         </label>
         <select
           id="outcome-filter"
           value={filters.outcome || ''}
           onChange={(e) => onChange('outcome', e.target.value || null)}
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition bg-white"
+          className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition bg-white"
         >
           <option value="">All Outcomes</option>
           {outcomes.map((outcome) => (
@@ -82,7 +82,7 @@ const FilterBar = ({ filters, onChange }) => {
               onChange('format', null);
               onChange('outcome', null);
             }}
-            className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+            className="px-4 py-2 text-sm font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
           >
             Clear Filters
           </button>

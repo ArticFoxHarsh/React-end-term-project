@@ -36,13 +36,13 @@ const FormatTag = ({ format }) => {
         };
       case 'MUN':
         return {
-          bg: 'bg-purple-100',
-          text: 'text-purple-800',
+          bg: 'bg-pink-100',
+          text: 'text-pink-800',
         };
       case 'GD':
         return {
-          bg: 'bg-indigo-100',
-          text: 'text-indigo-800',
+          bg: 'bg-green-100',
+          text: 'text-green-800',
         };
       case 'Parliamentary':
         return {
@@ -60,7 +60,7 @@ const FormatTag = ({ format }) => {
   const styles = getStyles();
 
   return (
-    <div className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${styles.bg} ${styles.text}`}>
+    <div className={`inline-block px-3 py-1 rounded-lg border border-gray-200 shadow-sm text-xs sm:text-sm font-semibold uppercase tracking-wide ${styles.bg} ${styles.text}`}>
       {format}
     </div>
   );

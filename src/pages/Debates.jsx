@@ -128,14 +128,14 @@ const Debates = () => {
         <div className="mb-8">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
-              <h1 className="text-4xl font-bold text-gray-900">All Debates</h1>
-              <p className="text-gray-600 mt-2">
+              <h1 className="text-4xl font-bold text-gray-900 uppercase">All Debates</h1>
+              <p className="text-gray-600 mt-2 font-medium">
                 {debates.length} debate{debates.length !== 1 ? 's' : ''} logged
               </p>
             </div>
             <button
               onClick={() => navigate('/log')}
-              className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-lg transition-colors flex items-center gap-2 justify-center md:justify-start"
+              className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors flex items-center gap-2 justify-center md:justify-start"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
@@ -165,7 +165,7 @@ const Debates = () => {
 
             {/* Results Summary */}
             {(searchQuery || filters.format || filters.outcome) && (
-              <div className="text-sm text-gray-600">
+              <div className="text-sm text-gray-600 font-medium">
                 Found <span className="font-medium text-gray-900">{filteredDebates.length}</span> debate
                 {filteredDebates.length !== 1 ? 's' : ''}
                 {searchQuery && ` matching "${searchQuery}"`}
@@ -195,9 +195,9 @@ const Debates = () => {
           />
         ) : (
           // No results with active filters
-          <div className="text-center py-12">
+          <div className="text-center py-12 bg-white border border-gray-200 rounded-lg shadow-sm">
             <div className="inline-block">
-              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4 mx-auto">
+              <div className="w-16 h-16 bg-gray-100 rounded-lg border border-gray-200 flex items-center justify-center mb-4 mx-auto">
                 <svg
                   className="w-8 h-8 text-gray-400"
                   fill="none"
@@ -212,7 +212,7 @@ const Debates = () => {
                   />
                 </svg>
               </div>
-              <h3 className="text-lg font-medium text-gray-900 mb-2">No debates found</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2 uppercase">No debates found</h3>
               <p className="text-gray-600 mb-4 max-w-sm mx-auto">
                 Try adjusting your search or filters to find what you're looking for.
               </p>
@@ -221,7 +221,7 @@ const Debates = () => {
                   setSearchQuery('');
                   setFilters({ format: null, outcome: null });
                 }}
-                className="px-4 py-2 text-purple-600 hover:bg-purple-50 border border-purple-600 rounded-lg font-medium transition-colors"
+                className="px-4 py-2 text-purple-600 hover:bg-purple-50 border border-purple-600 rounded-lg font-semibold transition-colors"
               >
                 Clear Filters
               </button>

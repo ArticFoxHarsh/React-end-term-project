@@ -36,7 +36,7 @@ const Insights = lazy(() => import('./pages/Insights'));
  */
 const LoadingFallback = () => (
   <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-    <LoadingSpinner />
+    <LoadingSpinner text="Loading insights..." />
   </div>
 );
 
