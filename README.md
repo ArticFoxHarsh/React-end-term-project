@@ -5,7 +5,7 @@ It helps you log debates, review outcomes, and measure growth over time.
 
 ## Deployment Link
 
-- Live App: [https://react-end-term-project-azure.vercel.app/dashboard]
+- Live App: [https://react-end-term-project-azure.vercel.app/login]
 
 ## Core Features
 
